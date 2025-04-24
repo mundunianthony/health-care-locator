@@ -14,19 +14,27 @@ interface BookingModalProps {
   propertyId: string;
 }
 
-const BookingModal: React.FC<BookingModalProps> = ({ opened, setOpened, email, propertyId }) => {
+const BookingModal: React.FC<BookingModalProps> = ({
+  opened,
+  setOpened,
+  email,
+  propertyId,
+}) => {
   const [date, setDate] = useState<Date | null>(null);
-  const { userDetails: { token }, setUserDetails } = useContext(UserDetailContext);
+  const {
+    userDetails: { token },
+    setUserDetails,
+  } = useContext(UserDetailContext);
 
   const handleBookingSuccess = () => {
-    Alert.alert('Success', 'You have successfully booked visit');
+    Alert.alert("Success", "You have successfully booked visit");
     setUserDetails((prev) => ({
       ...prev,
       bookings: [
         ...prev.bookings,
         {
           id: propertyId,
-          date: dayjs(date).format('DD/MM/YYYY'),
+          date: dayjs(date).format("DD/MM/YYYY"),
         },
       ],
     }));
@@ -35,7 +43,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ opened, setOpened, email, p
   const { mutate, isLoading } = useMutation({
     mutationFn: () => bookVisit(date, propertyId, email, token),
     onSuccess: handleBookingSuccess,
-    onError: (error) => Alert.alert('Error', error.message),
+    onError: (error) => Alert.alert("Error", error.message),
     onSettled: () => setOpened(false),
   });
 
@@ -59,23 +67,23 @@ const BookingModal: React.FC<BookingModalProps> = ({ opened, setOpened, email, p
 const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 10,
     borderRadius: 8,
     marginTop: 20,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
   },
 });

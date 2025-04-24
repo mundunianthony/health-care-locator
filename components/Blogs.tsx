@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { BLOGS } from "@/constants/data";
 
@@ -7,7 +14,7 @@ const Blogs: React.FC = () => {
   const navigation = useNavigation();
 
   const handleContinueReading = (id: number) => {
-    navigation.navigate('BlogDetails', { blogId: id });
+    navigation.navigate("BlogDetails", { blogId: id });
   };
 
   return (
@@ -43,17 +50,17 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   blogCard: {
     marginBottom: 20,
     borderRadius: 8,
-    overflow: 'hidden',
-    backgroundColor: '#fff',
+    overflow: "hidden",
+    backgroundColor: "#fff",
   },
   blogImage: {
-    width: '100%',
+    width: "100%",
     height: 150,
   },
   blogContent: {
@@ -61,21 +68,21 @@ const styles = StyleSheet.create({
   },
   blogTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   blogCategory: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
     marginBottom: 10,
   },
   readButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 10,
     borderRadius: 8,
   },
   readButtonText: {
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
   },
 });
 

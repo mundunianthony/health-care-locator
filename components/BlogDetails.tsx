@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { BLOGS } from "@/constants/data";
 
@@ -39,11 +46,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 10,
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 200,
     borderRadius: 8,
     marginBottom: 10,
@@ -54,23 +61,23 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   backButton: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 10,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   backButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
   },
   errorContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   errorText: {
     fontSize: 18,
-    color: '#666',
+    color: "#666",
   },
 });
 

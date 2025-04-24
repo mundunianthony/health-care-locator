@@ -5,9 +5,9 @@ import aboutImg from "@/assets/about.jpg";
 
 const About: React.FC = () => {
   const statistics = [
-    { label: 'Satisfied homebuyers', value: 12 },
-    { label: 'Cities served', value: 3 },
-    { label: 'Home visits booked', value: 45 },
+    { label: "Satisfied homebuyers", value: 12 },
+    { label: "Cities served", value: 3 },
+    { label: "Home visits booked", value: 45 },
   ];
 
   const [isVisible, setIsVisible] = useState(false);
@@ -24,15 +24,19 @@ const About: React.FC = () => {
           <View style={styles.quoteContainer}>
             <Icon name="double-quotes-l" size={24} />
             <Text style={styles.quoteText}>
-              "Homely.com transformed our home search by making viewings effortless and stress-free!"
+              "Homely.com transformed our home search by making viewings
+              effortless and stress-free!"
             </Text>
           </View>
         </View>
         <View style={styles.right}>
           <Text style={styles.sectionTitle}>Our Story</Text>
-          <Text style={styles.heading}>Simplifying Your Home Buying Journey</Text>
+          <Text style={styles.heading}>
+            Simplifying Your Home Buying Journey
+          </Text>
           <Text style={styles.paragraph}>
-            At Homely.com, we're revolutionizing the way you find your dream home...
+            At Homely.com, we're revolutionizing the way you find your dream
+            home...
           </Text>
           <View style={styles.statsContainer}>
             {statistics.map((stat, index) => (
@@ -54,28 +58,28 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   content: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   left: {
     flex: 1,
-    position: 'relative',
+    position: "relative",
   },
   image: {
-    width: '100%',
+    width: "100%",
     height: 300,
     borderRadius: 16,
   },
   quoteContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 16,
     left: 16,
-    backgroundColor: 'white',
+    backgroundColor: "white",
     padding: 10,
     borderRadius: 8,
   },
   quoteText: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   right: {
     flex: 1,
@@ -83,11 +87,11 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   heading: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginVertical: 10,
   },
   paragraph: {
@@ -95,22 +99,22 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   statsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
   },
   stat: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 10,
     borderRadius: 8,
     margin: 5,
   },
   statValue: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   statLabel: {
     fontSize: 14,
-    color: '#666',
+    color: "#666",
   },
 });
 

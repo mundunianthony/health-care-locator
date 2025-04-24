@@ -20,7 +20,10 @@ const Header: React.FC = () => {
         <ProfileMenu user={user} logout={logout} />
       ) : (
         <TouchableOpacity onPress={loginWithRedirect}>
-          <Image source={require("../assets/user.svg")} style={styles.userIcon} />
+          <Image
+            source={require("../assets/user.svg")}
+            style={styles.userIcon}
+          />
           <Text>Login</Text>
         </TouchableOpacity>
       )}

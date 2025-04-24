@@ -6,16 +6,19 @@ import BasicDetails from "@/components/BasicDetails";
 import Facilities from "@/components/Facilities";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const AddPropertyModal: React.FC<{ opened: boolean; setOpened: (opened: boolean) => void }> = ({ opened, setOpened }) => {
+const AddPropertyModal: React.FC<{
+  opened: boolean;
+  setOpened: (opened: boolean) => void;
+}> = ({ opened, setOpened }) => {
   const [active, setActive] = useState(0);
   const { user } = useAuth0();
   const [propertyDetails, setPropertyDetails] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     price: 0,
-    country: '',
-    city: '',
-    address: '',
+    country: "",
+    city: "",
+    address: "",
     image: null,
     facilities: {
       bedrooms: 0,
@@ -25,14 +28,40 @@ const AddPropertyModal: React.FC<{ opened: boolean; setOpened: (opened: boolean)
     userEmail: user?.email,
   });
 
-  const nextStep = () => setActive((current) => (current < 3 ? current + 1 : current));
-  const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
+  const nextStep = () =>
+    setActive((current) => (current < 3 ? current + 1 : current));
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
 
   const steps = [
-    <AddLocation key="location" nextStep={nextStep} propertyDetails={propertyDetails} setPropertyDetails={setPropertyDetails} />,
-    <UploadImage key="image" prevStep={prevStep} nextStep={nextStep} propertyDetails={propertyDetails} setPropertyDetails={setPropertyDetails} />,
-    <BasicDetails key="details" prevStep={prevStep} nextStep={nextStep} propertyDetails={propertyDetails} setPropertyDetails={setPropertyDetails} />,
-    <Facilities key="facilities" prevStep={prevStep} propertyDetails={propertyDetails} setPropertyDetails={setPropertyDetails} setOpened={setOpened} setActiveStep={setActive} />,
+    <AddLocation
+      key="location"
+      nextStep={nextStep}
+      propertyDetails={propertyDetails}
+      setPropertyDetails={setPropertyDetails}
+    />,
+    <UploadImage
+      key="image"
+      prevStep={prevStep}
+      nextStep={nextStep}
+      propertyDetails={propertyDetails}
+      setPropertyDetails={setPropertyDetails}
+    />,
+    <BasicDetails
+      key="details"
+      prevStep={prevStep}
+      nextStep={nextStep}
+      propertyDetails={propertyDetails}
+      setPropertyDetails={setPropertyDetails}
+    />,
+    <Facilities
+      key="facilities"
+      prevStep={prevStep}
+      propertyDetails={propertyDetails}
+      setPropertyDetails={setPropertyDetails}
+      setOpened={setOpened}
+      setActiveStep={setActive}
+    />,
   ];
 
   return (
@@ -52,7 +81,10 @@ const AddPropertyModal: React.FC<{ opened: boolean; setOpened: (opened: boolean)
             </TouchableOpacity>
           )}
           {active === 3 && (
-            <TouchableOpacity onPress={() => setOpened(false)} style={styles.button}>
+            <TouchableOpacity
+              onPress={() => setOpened(false)}
+              style={styles.button}
+            >
               <Text>Finish</Text>
             </TouchableOpacity>
           )}
@@ -69,16 +101,16 @@ const styles = StyleSheet.create({
   },
   stepTitle: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 20,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 20,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 10,
     borderRadius: 8,
   },

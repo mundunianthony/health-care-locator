@@ -22,7 +22,11 @@ const Facilities: React.FC<FacilitiesProps> = ({
   setOpened,
   setActiveStep,
 }) => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       bedrooms: propertyDetails.facilities.bedrooms,
       parkings: propertyDetails.facilities.parkings,
@@ -31,7 +35,9 @@ const Facilities: React.FC<FacilitiesProps> = ({
   });
 
   const { user } = useAuth0();
-  const { userDetails: { token } } = useContext(UserDetailContext);
+  const {
+    userDetails: { token },
+  } = useContext(UserDetailContext);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: () =>
@@ -120,7 +126,9 @@ const Facilities: React.FC<FacilitiesProps> = ({
       <Controller
         control={control}
         name="bathrooms"
-        rules={{ min: { value: 1, message: "Must have at least one bathroom" } }}
+        rules={{
+          min: { value: 1, message: "Must have at least one bathroom" },
+        }}
         render={({ field: { onChange, value } }) => (
           <TextInput
             style={styles.input}

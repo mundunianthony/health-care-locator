@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import Item from "@/components/Item";
 import { VscSettings } from "react-icons/vsc";
@@ -6,25 +6,24 @@ import { Link } from "react-router-dom";
 import useProperties from "@/hooks/useProperties";
 import { PuffLoader } from "react-spinners";
 // swiper
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const Properties = () => {
-
   const { data, isError, isLoading } = useProperties();
   if (isError) {
     return (
       <div>
         <span>Error while fetching data</span>
       </div>
-    )
+    );
   }
 
   if (isLoading) {
     return (
-      <div className='h-64 flexCenter'>
+      <div className="h-64 flexCenter">
         <PuffLoader
           height="80"
           width="80"
@@ -33,19 +32,22 @@ const Properties = () => {
           aria-label="puff-loading"
         />
       </div>
-
-    )
+    );
   }
 
   // console.log(data);
   return (
-    <section className='max-padd-container'>
-      <div className='max-padd-container bg-primary py-16 xl:py-28 rounded-3xl'>
-        <span className='medium-18'>Your Future Home Awaits!</span>
-        <h2 className='h2'>Find Your Dream Here</h2>
+    <section className="max-padd-container">
+      <div className="max-padd-container bg-primary py-16 xl:py-28 rounded-3xl">
+        <span className="medium-18">Your Future Home Awaits!</span>
+        <h2 className="h2">Find Your Dream Here</h2>
         <div className="flexBetween mt-8 mb-6">
-          <h5><span className="font-bold">Showing 1-9</span> out of 1k properties</h5>
-          <Link to={'/'}><VscSettings className="bg-white text-3xl rounded-md h-10 w-10 p-2 border" /></Link>
+          <h5>
+            <span className="font-bold">Showing 1-9</span> out of 1k properties
+          </h5>
+          <Link to={"/"}>
+            <VscSettings className="bg-white text-3xl rounded-md h-10 w-10 p-2 border" />
+          </Link>
         </div>
         {/* container */}
         <Swiper
@@ -68,7 +70,7 @@ const Properties = () => {
             },
           }}
           modules={[Autoplay]}
-          className='h-[488px] md:h-[533px] xl:h-[422px] mt-5'
+          className="h-[488px] md:h-[533px] xl:h-[422px] mt-5"
         >
           {data.slice(0, 6).map((property) => (
             <SwiperSlide key={property.title}>
@@ -77,8 +79,8 @@ const Properties = () => {
           ))}
         </Swiper>
       </div>
-    </section >
-  )
-}
+    </section>
+  );
+};
 
-export default Properties
+export default Properties;

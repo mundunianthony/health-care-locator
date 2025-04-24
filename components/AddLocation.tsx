@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import MapView from "react-native-maps";
 import useCountries from "@/hooks/useCountries";
@@ -11,18 +17,29 @@ interface AddLocationProps {
   nextStep: () => void;
 }
 
-const AddLocation: React.FC<AddLocationProps> = ({ propertyDetails, setPropertyDetails, nextStep }) => {
+const AddLocation: React.FC<AddLocationProps> = ({
+  propertyDetails,
+  setPropertyDetails,
+  nextStep,
+}) => {
   const { getAll } = useCountries();
-  const [country, setCountry] = useState(propertyDetails.country || '');
-  const [city, setCity] = useState(propertyDetails.city || '');
-  const [address, setAddress] = useState(propertyDetails.address || '');
+  const [country, setCountry] = useState(propertyDetails.country || "");
+  const [city, setCity] = useState(propertyDetails.city || "");
+  const [address, setAddress] = useState(propertyDetails.address || "");
 
   const handleSubmit = () => {
-    if (!validateString(country) || !validateString(city) || !validateString(address)) {
+    if (
+      !validateString(country) ||
+      !validateString(city) ||
+      !validateString(address)
+    ) {
       setPropertyDetails({ ...propertyDetails, country, city, address });
       nextStep();
     } else {
-      Alert.alert('Validation Error', 'Please fill all fields with at least 3 characters.');
+      Alert.alert(
+        "Validation Error",
+        "Please fill all fields with at least 3 characters."
+      );
     }
   };
 
@@ -72,26 +89,26 @@ const styles = StyleSheet.create({
   },
   picker: {
     height: 50,
-    width: '100%',
+    width: "100%",
     marginBottom: 10,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     padding: 10,
     marginBottom: 10,
     borderRadius: 5,
   },
   map: {
-    width: '100%',
+    width: "100%",
     height: 200,
     marginBottom: 20,
   },
   button: {
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     padding: 10,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
 });
 
