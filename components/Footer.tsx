@@ -1,72 +1,78 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from '../constant/data'
+import React from "react";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from "../constant/data";
 
-const Footer = () => {
-    return (
-        <footer className='max-padd-container mb-4'>
-            <div className='max-padd-container bg-primary rounded-tr-3xl rounded-tl-3xl pt-12 xl:pt-20 pb-8'>
-                <h3 className='h3'>Ready to find your dream home?</h3>
-                <p>Schedule visits to properties you love with just a few clicks.</p>
-                <hr className='my-8 bg-slate-900/30 h-[2px]' />
-                {/* container */}
-                <div className='flex justify-between flex-wrap gap-2
-                '>
-                    <div className='max-w-sm'>
-                        <Link to={'/'} className='flex items-center gap-x-2'>
-                            <span className='font-[900] text-[24px]'>Homely<span className='font-[600] medium-20'>.com</span></span>
-                        </Link>
-                        <p className='py-4'>Homely.com makes home buying simpler by connecting you directly with properties and making visit scheduling effortless.</p>
-                        <div className='flexBetween pl-6 h-[3.3rem] bg-white w-full max-w-[366px] rounded-full ring-1 ring-slate-500/5'>
-                            <input type="email" placeholder='Enter your email' className='bg-transparent border-none outline-none' />
-                            <button className='btn-secondary rounded-full relative right-[0.33rem]'>Subscribe</button>
-                        </div>
-                    </div>
-                    <div className='flex justify-between flex-wrap gap-8'>
-                        {FOOTER_LINKS.map((col) => (
-                            <FooterColumn key={col.title} title={col.title}>
-                                <ul className='flex flex-col gap-4 regular-14 text-gray-20'>
-                                    {col.links.map((link) => (
-                                        <Link to='/' key={link}>{link}</Link>
-                                    ))}
-                                </ul>
-                            </FooterColumn>
-                        ))}
-                        <div className='flex flex-col gap-5'>
-                            <FooterColumn title={FOOTER_CONTACT_INFO.title}>
-                                {FOOTER_CONTACT_INFO.links.map((link) => (
-                                    <Link to='/' key={link.label} className='flex gap-4 md:flex-col lg:flex-row'>
-                                        <p>{link.label}:</p><p className='bold-15'>{link.value}</p>
-                                    </Link>
-                                ))}
-                            </FooterColumn>
-                        </div>
-                        <div className='flex '>
-                            <FooterColumn title={SOCIALS.title}>
-                                <ul className='flex gap-4'>
-                                    {SOCIALS.links.map((link) => (
-                                        <Link to='/' key={link.id} className='text-xl'>{link.icon}</Link>
-                                    ))}
-                                </ul>
-                            </FooterColumn>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* copyrights */}
-            <p className='text-white bg-tertiary medium-14 py-2 px-8 rounded-b-3xl flexBetween '><span>2025 <strong>Homely</strong>.com</span><span>All rights reserved</span></p>
-        </footer>
-    )
-}
+const Footer: React.FC = () => {
+  return (
+    <View style={styles.footer}>
+      <Text style={styles.title}>Homely.com</Text>
+      <Text>Subscribe to our newsletter</Text>
+      <View style={styles.subscribe}>
+        <TextInput placeholder="Enter your email" style={styles.input} />
+        <Button title="Subscribe" />
+      </View>
+      <View style={styles.links}>
+        {FOOTER_LINKS.map((col) => (
+          <View key={col.title}>
+            <Text>{col.title}</Text>
+            {col.links.map((link) => (
+              <TouchableOpacity key={link}>
+                <Text>{link}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        ))}
+      </View>
+      <View style={styles.contact}>
+        <Text>{FOOTER_CONTACT_INFO.title}</Text>
+        {FOOTER_CONTACT_INFO.links.map((link) => (
+          <Text key={link.label}>
+            {link.label}: {link.value}
+          </Text>
+        ))}
+      </View>
+      <View style={styles.socials}>
+        {SOCIALS.links.map((link) => (
+          <TouchableOpacity key={link.id}>
+            <Icon name={link.icon} />
+          </TouchableOpacity>
+        ))}
+      </View>
+      <Text>2025 Homely.com All rights reserved</Text>
+    </View>
+  );
+};
 
-export default Footer
+const styles = StyleSheet.create({
+  footer: {
+    padding: 16,
+    backgroundColor: "#f1f1f1",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "900",
+  },
+  subscribe: {
+    flexDirection: "row",
+    marginVertical: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    flex: 1,
+  },
+  links: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+  contact: {
+    marginVertical: 10,
+  },
+  socials: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
+});
 
-
-const FooterColumn = ({ title, children }) => {
-    return (
-        <div className='flex flex-col gap-5'>
-            <h4 className='bold-18 whitespace-nowrap'>{title}</h4>
-            {children}
-        </div>
-    )
-}
+export default Footer;
