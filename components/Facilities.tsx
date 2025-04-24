@@ -1,66 +1,62 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Button, Group, NumberInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import React, { useContext } from "react";
-import UserDetailContext from "../context/UserDetailContext";
-import useProperties from "../hooks/useProperties";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "react-query";
-import { toast } from "react-toastify";
+import { toast } from "react-native-toast-message";
 import { createResidency } from "../utils/api";
+import UserDetailContext from "../context/UserDetailContext";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const Facilities = ({
+interface FacilitiesProps {
+  prevStep: () => void;
+  propertyDetails: any;
+  setPropertyDetails: (details: any) => void;
+  setOpened: (opened: boolean) => void;
+  setActiveStep: (step: number) => void;
+}
+
+const Facilities: React.FC<FacilitiesProps> = ({
   prevStep,
   propertyDetails,
   setPropertyDetails,
   setOpened,
   setActiveStep,
 }) => {
-  const form = useForm({
-    initialValues: {
+  const { control, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
       bedrooms: propertyDetails.facilities.bedrooms,
       parkings: propertyDetails.facilities.parkings,
       bathrooms: propertyDetails.facilities.bathrooms,
     },
-    validate: {
-      bedrooms: (value) => (value < 1 ? "Must have at least one bedroom" : null),
-      bathrooms: (value) =>
-        value < 1 ? "Must have at least one bathroom" : null,
-    },
   });
-  const { bedrooms, parkings, bathrooms } = form.values;
 
-  const handleSubmit = () => {
-    const { hasErrors } = form.validate();
-    if (!hasErrors) {
-      setPropertyDetails((prev) => ({
-        ...prev,
-        facilities: { bedrooms, parkings, bathrooms },
-      }));
-      mutate();
-    }
-  };
-
-  //   Upload
   const { user } = useAuth0();
-  const {
-    userDetails: { token },
-  } = useContext(UserDetailContext);
-  const { refetch: refetchProperties } = useProperties();
+  const { userDetails: { token } } = useContext(UserDetailContext);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: () =>
       createResidency(
         {
           ...propertyDetails,
-          facilities: { bedrooms, parkings, bathrooms },
+          facilities: {
+            bedrooms: propertyDetails.facilities.bedrooms,
+            parkings: propertyDetails.facilities.parkings,
+            bathrooms: propertyDetails.facilities.bathrooms,
+          },
         },
         token,
-        user?.email // Pass userEmail obtained from Auth0
+        user?.email
       ),
-    onError: ({ response }) =>
-      toast.error(response.data.message, { position: "bottom-right" }),
-    onSettled: () => {
-      toast.success("Added Successfully", { position: "bottom-right" });
+    onError: (error: any) =>
+      toast.show({
+        type: "error",
+        text1: error.response?.data?.message || "Error creating residency",
+      }),
+    onSuccess: () => {
+      toast.show({
+        type: "success",
+        text1: "Added Successfully",
+      });
       setPropertyDetails({
         title: "",
         description: "",
@@ -74,51 +70,96 @@ const Facilities = ({
           parkings: 0,
           bathrooms: 0,
         },
-        userEmail: user?.email, // Ensure userEmail is included in propertyDetails
+        userEmail: user?.email,
       });
       setOpened(false);
       setActiveStep(0);
-      refetchProperties();
     },
   });
 
-  return (
-    <Box maw={"30%"} mx="auto" my={"sm"}>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <NumberInput
-          withAsterisk
-          label="No of Bedrooms"
-          min={0}
-          {...form.getInputProps("bedrooms")}
-        />
-        <NumberInput
-          label="No of parkings"
-          min={0}
-          {...form.getInputProps("parkings")}
-        />
-        <NumberInput
-          withAsterisk
-          label="No of bathrooms"
-          min={0}
-          {...form.getInputProps("bathrooms")}
-        />
+  const onSubmit = (data: any) => {
+    setPropertyDetails((prev) => ({
+      ...prev,
+      facilities: data,
+    }));
+    mutate();
+  };
 
-        <Group position="center" mt="xl">
-          <Button variant="default" onClick={prevStep}>
-            Back
-          </Button>
-          <Button type="submit" color="green" disabled={isLoading}>
-            {isLoading ? "Submitting" : "Add Property"}
-          </Button>
-        </Group>
-      </form>
-    </Box>
+  return (
+    <View style={styles.container}>
+      <Controller
+        control={control}
+        name="bedrooms"
+        rules={{ min: { value: 1, message: "Must have at least one bedroom" } }}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="No of Bedrooms"
+            keyboardType="numeric"
+            value={value.toString()}
+            onChangeText={(text) => onChange(parseInt(text, 10))}
+          />
+        )}
+      />
+      {errors.bedrooms && <Text>{errors.bedrooms.message}</Text>}
+
+      <Controller
+        control={control}
+        name="parkings"
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="No of parkings"
+            keyboardType="numeric"
+            value={value.toString()}
+            onChangeText={(text) => onChange(parseInt(text, 10))}
+          />
+        )}
+      />
+
+      <Controller
+        control={control}
+        name="bathrooms"
+        rules={{ min: { value: 1, message: "Must have at least one bathroom" } }}
+        render={({ field: { onChange, value } }) => (
+          <TextInput
+            style={styles.input}
+            placeholder="No of bathrooms"
+            keyboardType="numeric"
+            value={value.toString()}
+            onChangeText={(text) => onChange(parseInt(text, 10))}
+          />
+        )}
+      />
+      {errors.bathrooms && <Text>{errors.bathrooms.message}</Text>}
+
+      <View style={styles.buttonContainer}>
+        <Button title="Back" onPress={prevStep} />
+        <Button
+          title={isLoading ? "Submitting" : "Add Property"}
+          onPress={handleSubmit(onSubmit)}
+          disabled={isLoading}
+        />
+      </View>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginBottom: 10,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 20,
+  },
+});
 
 export default Facilities;
