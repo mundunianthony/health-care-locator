@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
-import { useRoute, useNavigation } from '@react-navigation/native';
-import { BLOGS } from '../constant/data';
+import React from "react";
+import { View, Text, Image, ScrollView, TouchableOpacity, StyleSheet } from "react-native";
+import { useRoute, useNavigation } from "@react-navigation/native";
+import { BLOGS } from "@/constants/data";
 
 const BlogDetails: React.FC = () => {
   const route = useRoute<any>();

@@ -1,9 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
-import Home from "./Home"; // Example screen
-import Listing from "./Listing"; // Example screen
-import Contact from "./Contact"; // Example screen
+import Home from "@/screens/HomeScreen";
+import Listing from "@/screens/ListingScreen";
+import Contact from "@/screens/ContactScreen";
 
 const Tab = createBottomTabNavigator();
 

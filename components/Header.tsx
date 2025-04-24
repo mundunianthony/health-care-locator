@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useNavigation } from "@react-navigation/native";
-import ProfileMenu from "./ProfileMenu"; // Assuming this is converted
+import ProfileMenu from "@/components/ProfileMenu";
 
 const Header: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);

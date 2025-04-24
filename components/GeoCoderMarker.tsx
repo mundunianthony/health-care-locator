@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Marker } from "react-native-maps";
-import * as ELG from "esri-leaflet-geocoder"; // Ensure this works or find an alternative
+import * as ELG from "esri-leaflet-geocoder";
 
 interface GeoCoderMarkerProps {
   address: string;

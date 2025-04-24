@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import MapView from 'react-native-maps';
-import useCountries from '../hooks/useCountries';
-import { validateString } from '../utils/common';
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import MapView from "react-native-maps";
+import useCountries from "@/hooks/useCountries";
+import { validateString } from "@/utils/common";
 
 interface AddLocationProps {
   propertyDetails: any;

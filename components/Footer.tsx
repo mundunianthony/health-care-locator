@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from "../constant/data";
+import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from "@/constants/data";
 
 const Footer: React.FC = () => {
   return (

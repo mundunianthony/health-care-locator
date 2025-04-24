@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet } from 'react-native';
-import AddLocation from './AddLocation'; // Must be converted
-import UploadImage from './UploadImage'; // Must be converted
-import BasicDetails from './BasicDetails'; // Must be converted
-import Facilities from './Facilities'; // Must be converted
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { useState } from "react";
+import { View, Text, Modal, TouchableOpacity, StyleSheet } from "react-native";
+import AddLocation from "@/components/AddLocation";
+import UploadImage from "@/components/UploadImage";
+import BasicDetails from "@/components/BasicDetails";
+import Facilities from "@/components/Facilities";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const AddPropertyModal: React.FC<{ opened: boolean; setOpened: (opened: boolean) => void }> = ({ opened, setOpened }) => {
   const [active, setActive] = useState(0);

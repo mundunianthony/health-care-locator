@@ -1,11 +1,10 @@
 'use client'
-import React from 'react'
-import Item from './Item'
-import { VscSettings } from 'react-icons/vsc'
-import { Link } from "react-router-dom"
-// import { PROPERTIES } from '../constant/data'
-import useProperties from '../hooks/useProperties';
-import { PuffLoader } from "react-spinners"
+import React from "react";
+import Item from "@/components/Item";
+import { VscSettings } from "react-icons/vsc";
+import { Link } from "react-router-dom";
+import useProperties from "@/hooks/useProperties";
+import { PuffLoader } from "react-spinners";
 // swiper
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';

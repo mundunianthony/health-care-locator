@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { Modal, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import DatePicker from 'react-native-date-picker';
-import { useMutation } from 'react-query';
-import UserDetailContext from '../context/UserDetailContext';
-import { bookVisit } from '../utils/api';
-import { Alert } from 'react-native';
-import dayjs from 'dayjs';
+import React, { useContext, useState } from "react";
+import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import DatePicker from "react-native-date-picker";
+import { useMutation } from "react-query";
+import UserDetailContext from "@/context/UserDetailContext";
+import { bookVisit } from "@/utils/api";
+import { Alert } from "react-native";
+import dayjs from "dayjs";
 
 interface BookingModalProps {
   opened: boolean;

@@ -1,6 +1,6 @@
 import React from "react";
 import MapView, { Marker } from "react-native-maps";
-import GeoCoderMarker from "./GeoCoderMarker"; // Assuming converted
+import GeoCoderMarker from "@/components/GeoCoderMarker";
 
 interface MapProps {
   address: string;

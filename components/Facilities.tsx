@@ -3,8 +3,8 @@ import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "react-query";
 import { toast } from "react-native-toast-message";
-import { createResidency } from "../utils/api";
-import UserDetailContext from "../context/UserDetailContext";
+import { createResidency } from "@/utils/api";
+import UserDetailContext from "@/context/UserDetailContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
 interface FacilitiesProps {
