@@ -1,56 +1,23 @@
-import React, { useContext, useEffect } from 'react'
-import Header from './Header'
-import Footer from './Footer'
-import { Outlet } from 'react-router-dom'
-import { useAuth0 } from '@auth0/auth0-react'
-import UserDetailContext from '../context/UserDetailContext'
-import { useMutation } from 'react-query'
-import { createUser } from '../utils/api'
-import useFavourites from '../hooks/useFavourites.jsx'
-import useBookings from '../hooks/useBookings.jsx'
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Header from "./Header"; // Assuming converted
+import Footer from "./Footer"; // Assuming converted
+import Home from "./Home"; // Example screen
+import Listing from "./Listing"; // Example screen
 
-const Layout = () => { 
+const Stack = createStackNavigator();
 
-    useFavourites()
-    useBookings()
+const Layout: React.FC = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Listing" component={Listing} />
+        {/* Add other screens */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-    const { isAuthenticated, user, getAccessTokenWithPopup } = useAuth0();
-    const { setUserDetails } = useContext(UserDetailContext);
-
-    const { mutate } = useMutation({
-        mutationKey: [user?.email],
-        mutationFn: (token) => createUser(user?.email, token)
-    })
-    
-
-    useEffect(() => {
-
-        const getTokenAndRegister = async () => {
-
-            const res = await getAccessTokenWithPopup({
-                authorizationParams: {
-                    audience: "http://localhost:8000",
-                    scope: "openid profile email"
-                },
-            });
-            localStorage.setItem("access_token", res);
-            setUserDetails((prev) => ({ ...prev, token: res }));
-            // console.log(res)
-            mutate(res)
-        };
-
-        isAuthenticated && getTokenAndRegister();
-    }, [isAuthenticated])
-
-    return (
-        <>
-            <div>
-                <Header />
-                <Outlet />
-            </div>
-            <Footer />
-        </>
-    )
-}
-
-export default Layout
+export default Layout;
