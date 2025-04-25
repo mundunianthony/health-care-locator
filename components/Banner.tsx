@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
-import bannerImg from '../assets/banner.png'; // Assuming a banner image
+
+const bannerImg = require('../assets/banner.png'); // Assuming a banner image
 
 const Banner: React.FC = () => {
   return (
