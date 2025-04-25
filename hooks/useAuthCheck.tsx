@@ -1,18 +1,22 @@
-import {useAuth0} from "@auth0/auth0-react"
-import { toast } from "react-toastify"
+import { useAuth0 } from "@auth0/auth0-react";
+import Toast from "../components/Toast";
 
 const useAuthCheck = () => {
+  const { isAuthenticated } = useAuth0();
 
-    const { isAuthenticated } = useAuth0()
-    const validateLogin = () => {
-        if(!isAuthenticated){
-            toast.error("Please Login first", {position: "bottom-right"})
-            return false
-        } else return true
+  const validateLogin = () => {
+    if (!isAuthenticated) {
+      Toast.show({
+        type: "error",
+        text1: "Please Login first",
+        position: "bottom",
+      });
+      return false;
     }
-  return (
-    {validateLogin}
-  )
-}
+    return true;
+  };
 
-export default useAuthCheck
+  return { validateLogin };
+};
+
+export default useAuthCheck;
