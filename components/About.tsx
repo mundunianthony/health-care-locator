@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import aboutImg from "assets/about.jpg";
-
+const aboutImg = require("../assets/about.jpg");
 const About: React.FC = () => {
   const statistics = [
     { label: "Satisfied homebuyers", value: 12 },

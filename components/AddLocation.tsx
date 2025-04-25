@@ -9,7 +9,7 @@ import {
 import { Picker } from "@react-native-picker/picker";
 import MapView from "react-native-maps";
 import useCountries from "@/hooks/useCountries";
-import { validateString } from "@/utils/common";
+import { validateString } from "../app/utils/common";
 
 interface AddLocationProps {
   propertyDetails: any;
