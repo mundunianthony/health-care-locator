@@ -38,7 +38,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
     borderWidth: 0,
-    outlineWidth: 0,
     paddingLeft: 8,
     fontSize: 16,
   },
