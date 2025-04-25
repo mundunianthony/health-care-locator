@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
-import Icon from "react-native-vector-icons/Ri";
-import aboutImg from "@/assets/about.jpg";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import aboutImg from "assets/about.jpg";
 
 const About: React.FC = () => {
   const statistics = [
