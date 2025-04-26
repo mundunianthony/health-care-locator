@@ -5,8 +5,8 @@ import useAuthCheck from "@/hooks/useAuthCheck";
 import { useMutation } from "react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import UserDetailContext from "@/context/UserDetailContext";
-import { toFav } from "@/utils/api";
-import { checkFavourites, updateFavourites } from "@/utils/common";
+import { toFav } from "@/app/utils/api";
+import { checkFavourites, updateFavourites } from "@/app/utils/common";
 
 interface HeartBtnProps {
   id: string;
