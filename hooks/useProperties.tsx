@@ -1,7 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAllProperties, Property as ApiProperty } from '../app/utils/api';
-
-type Property = ApiProperty;
+import { getAllProperties, Property } from '../app/utils/api'; // Import Property from api.ts
 
 const useProperties = () => {
   const {
@@ -11,7 +9,7 @@ const useProperties = () => {
     refetch,
   } = useQuery<Property[]>({
     queryKey: ['allProperties'],
-    queryFn: getAllProperties,
+    queryFn: getAllProperties, // Ensure the query function matches the imported Property type
     refetchOnWindowFocus: false, // optional, mostly useful for web
   });
 
