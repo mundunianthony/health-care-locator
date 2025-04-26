@@ -8,6 +8,7 @@ interface Booking {
 interface UserDetails {
   token: string;
   bookings: Booking[];
+  favourites: string[]; // Added favourites property
 }
 
 interface UserDetailContextProps {
@@ -16,7 +17,7 @@ interface UserDetailContextProps {
 }
 
 const UserDetailContext = createContext<UserDetailContextProps>({
-  userDetails: { token: "", bookings: [] },
+  userDetails: { token: "", bookings: [], favourites: [] }, // Initialize favourites
   setUserDetails: () => {},
 });
 
@@ -26,6 +27,7 @@ export const UserDetailProvider: React.FC<{ children: React.ReactNode }> = ({
   const [userDetails, setUserDetails] = useState<UserDetails>({
     token: "",
     bookings: [],
+    favourites: [], // Initialize favourites
   });
 
   return (

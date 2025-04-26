@@ -1,9 +1,16 @@
 import React from "react";
 import { View, Text, ImageBackground, Button, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
+// Define the type for the navigation stack
+type RootStackParamList = {
+  Listing: undefined; // Add other routes here if needed
+};
 
 const Hero: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <ImageBackground
@@ -20,7 +27,7 @@ const Hero: React.FC = () => {
         </Text>
         <Button
           title="Browse Homes"
-          onPress={() => navigation.navigate("Listing")}
+          onPress={() => navigation.navigate("Listing")} // Typed navigation
         />
       </View>
     </ImageBackground>
