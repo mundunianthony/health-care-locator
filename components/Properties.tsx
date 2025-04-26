@@ -25,9 +25,7 @@ const Properties = () => {
     return (
       <div className="h-64 flexCenter">
         <PuffLoader
-          height="80"
-          width="80"
-          radius={1}
+          size={80}
           color="#555"
           aria-label="puff-loading"
         />
@@ -72,7 +70,7 @@ const Properties = () => {
           modules={[Autoplay]}
           className="h-[488px] md:h-[533px] xl:h-[422px] mt-5"
         >
-          {data.slice(0, 6).map((property) => (
+          {(data ?? []).slice(0, 6).map((property) => (
             <SwiperSlide key={property.title}>
               <Item property={property} />
             </SwiperSlide>
