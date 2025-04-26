@@ -2,7 +2,12 @@ import React from "react";
 import { Avatar, Menu } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
-const ProfileMenu = ({ user, logout }) => {
+interface ProfileMenuProps {
+  user: { picture?: string } | null;
+  logout: () => void;
+}
+
+const ProfileMenu: React.FC<ProfileMenuProps> = ({ user, logout }) => {
 
   const navigate = useNavigate()
   return (
