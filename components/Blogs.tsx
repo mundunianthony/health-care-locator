@@ -8,10 +8,12 @@ import {
   StyleSheet,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "@/navigation/types";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { BLOGS } from "@/constants/data";
-
 const Blogs: React.FC = () => {
-  const navigation = useNavigation();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const handleContinueReading = (id: number) => {
     navigation.navigate("BlogDetails", { blogId: id });

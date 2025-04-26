@@ -3,7 +3,7 @@ import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import DatePicker from "react-native-date-picker";
 import { useMutation } from "react-query";
 import UserDetailContext from "@/context/UserDetailContext";
-import { bookVisit } from "@/utils/api";
+import { bookVisit } from "@/app/utils/api";
 import { Alert } from "react-native";
 import dayjs from "dayjs";
 
@@ -41,9 +41,9 @@ const BookingModal: React.FC<BookingModalProps> = ({
   };
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: () => bookVisit(date, propertyId, email, token),
+    mutationFn: () => bookVisit(date ?? new Date(), propertyId, email, token),
     onSuccess: handleBookingSuccess,
-    onError: (error) => Alert.alert("Error", error.message),
+    onError: (error) => Alert.alert("Error", (error as Error).message),
     onSettled: () => setOpened(false),
   });
 

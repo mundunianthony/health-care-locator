@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { validateString } from '../utils/common';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { validateString } from '../app/utils/common';
 
 interface BasicDetailsProps {
   propertyDetails: any;
