@@ -1,6 +1,14 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from "@/constants/data";
+import { Icon } from "react-native-elements"; // Import Icon from react-native-elements
 
 const Footer: React.FC = () => {
   return (
@@ -9,7 +17,7 @@ const Footer: React.FC = () => {
       <Text>Subscribe to our newsletter</Text>
       <View style={styles.subscribe}>
         <TextInput placeholder="Enter your email" style={styles.input} />
-        <Button title="Subscribe" />
+        <Button title="Subscribe" onPress={() => {}} /> {/* Add onPress handler */}
       </View>
       <View style={styles.links}>
         {FOOTER_LINKS.map((col) => (
@@ -34,7 +42,7 @@ const Footer: React.FC = () => {
       <View style={styles.socials}>
         {SOCIALS.links.map((link) => (
           <TouchableOpacity key={link.id}>
-            <Icon name={link.icon} />
+            <Icon name={link.icon as unknown as string} /> {/* Removed type property */}
           </TouchableOpacity>
         ))}
       </View>
