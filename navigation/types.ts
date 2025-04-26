@@ -1,5 +1,9 @@
 export type RootStackParamList = {
-    BlogDetails: { blogId: number };
-    // Add other screens here as needed
-  };
-  
+  BlogDetails: { blogId: number };
+  Home: undefined;
+  Listing: undefined;
+  AddProperty: undefined;
+  Bookings: undefined;
+  Favourites: undefined;
+  Blogs: undefined;
+};
