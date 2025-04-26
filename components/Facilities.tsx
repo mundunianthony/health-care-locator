@@ -2,14 +2,21 @@ import React, { useContext } from "react";
 import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { useMutation } from "react-query";
-import { toast } from "react-native-toast-message";
-import { createResidency } from "@/utils/api";
+import Toast from "react-native-toast-message";
+import { createResidency } from "@/app/utils/api";
 import UserDetailContext from "@/context/UserDetailContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
 interface FacilitiesProps {
   prevStep: () => void;
-  propertyDetails: any;
+  propertyDetails: {
+    facilities: {
+      bedrooms: number;
+      parkings: number;
+      bathrooms: number;
+    };
+    [key: string]: any;
+  };
   setPropertyDetails: (details: any) => void;
   setOpened: (opened: boolean) => void;
   setActiveStep: (step: number) => void;
@@ -51,15 +58,15 @@ const Facilities: React.FC<FacilitiesProps> = ({
           },
         },
         token,
-        user?.email
+        user?.email ?? ""
       ),
     onError: (error: any) =>
-      toast.show({
+      Toast.show({
         type: "error",
         text1: error.response?.data?.message || "Error creating residency",
       }),
     onSuccess: () => {
-      toast.show({
+      Toast.show({
         type: "success",
         text1: "Added Successfully",
       });
@@ -83,8 +90,8 @@ const Facilities: React.FC<FacilitiesProps> = ({
     },
   });
 
-  const onSubmit = (data: any) => {
-    setPropertyDetails((prev) => ({
+  const onSubmit = (data: { bedrooms: number; parkings: number; bathrooms: number }) => {
+    setPropertyDetails((prev: any) => ({
       ...prev,
       facilities: data,
     }));
