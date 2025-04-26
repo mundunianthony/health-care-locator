@@ -1,15 +1,15 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import Toast from "../components/Toast";
+import { useAuth0 } from 'react-native-auth0';
+import Toast from 'react-native-toast-message';
 
 const useAuthCheck = () => {
-  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0(); // use `user` or any custom logic to check auth
 
-  const validateLogin = () => {
-    if (!isAuthenticated) {
+  const validateLogin = (): boolean => {
+    if (!user) {
       Toast.show({
-        type: "error",
-        text1: "Please Login first",
-        position: "bottom",
+        type: 'error',
+        text1: 'Please login first',
+        position: 'bottom',
       });
       return false;
     }
