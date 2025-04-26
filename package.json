@@ -62,7 +62,8 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^7.5.2",
     "react-spinners": "^0.17.0",
-    "swiper": "^11.2.6"
+    "swiper": "^11.2.6",
+    "world-countries": "^5.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
