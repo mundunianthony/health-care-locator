@@ -1,84 +1,107 @@
-"use client";
-import React from "react";
-import Item from "@/components/Item";
-import { VscSettings } from "react-icons/vsc";
-import { Link } from "react-router-dom";
-import useProperties from "@/hooks/useProperties";
-import { PuffLoader } from "react-spinners";
-// swiper
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { useNavigation, NavigationProp } from '@react-navigation/native';
+import { RootStackParamList } from '../navigation/types'; // Import your navigation types
+import { VscSettings } from 'react-icons/vsc';
+import { ToastAndroid } from 'react-native';
+import { useProperties } from '../hooks/useProperties';
+import Swiper from 'react-native-swiper';
+import Item from './Item';
+import {Loading} from './Loading';
 
-const Properties = () => {
-  const { data, isError, isLoading } = useProperties();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const navigation = useNavigation();
+  const { data, isLoading, isError } = useProperties();
+
   if (isError) {
     return (
-      <div>
-        <span>Error while fetching data</span>
-      </div>
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>Error while fetching data</Text>
+      </View>
     );
   }
 
   if (isLoading) {
-    return (
-      <div className="h-64 flexCenter">
-        <PuffLoader
-          size={80}
-          color="#555"
-          aria-label="puff-loading"
-        />
-      </div>
-    );
+    return <Loading />;
   }
 
-  // console.log(data);
   return (
-    <section className="max-padd-container">
-      <div className="max-padd-container bg-primary py-16 xl:py-28 rounded-3xl">
-        <span className="medium-18">Your Future Home Awaits!</span>
-        <h2 className="h2">Find Your Dream Here</h2>
-        <div className="flexBetween mt-8 mb-6">
-          <h5>
-            <span className="font-bold">Showing 1-9</span> out of 1k properties
-          </h5>
-          <Link to={"/"}>
-            <VscSettings className="bg-white text-3xl rounded-md h-10 w-10 p-2 border" />
-          </Link>
-        </div>
-        {/* container */}
-        <Swiper
-          autoplay={{
-            delay: 4000,
-            disableOnInteraction: false,
-          }}
-          breakpoints={{
-            600: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            1124: {
-              slidesPerView: 3,
-              spaceBetween: 30,
-            },
-            1300: {
-              slidesPerView: 4,
-              spaceBetween: 30,
-            },
-          }}
-          modules={[Autoplay]}
-          className="h-[488px] md:h-[533px] xl:h-[422px] mt-5"
-        >
-          {(data ?? []).slice(0, 6).map((property) => (
-            <SwiperSlide key={property.title}>
-              <Item property={property} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Your Future Home Awaits!</Text>
+        <Text style={styles.subtitle}>Find Your Dream Here</Text>
+        <View style={styles.actions}>
+          <Text style={styles.count}>
+            <Text style={styles.bold}>Showing 1-9</Text> out of 1k properties
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+            <VscSettings style={styles.settingsIcon} />
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <Swiper
+        autoplay
+        showsPagination={false}
+        showsButtons={false}
+        style={styles.swiper}
+      >
+        {data.slice(0, 6).map((property) => (
+          <Item key={property.id} property={property} />
+        ))}
+      </Swiper>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#fff',
+  },
+  header: {
+    marginBottom: 16,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333',
+  },
+  subtitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#000',
+    marginVertical: 8,
+  },
+  actions: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  count: {
+    fontSize: 14,
+    color: '#666',
+  },
+  bold: {
+    fontWeight: '700',
+  },
+  settingsIcon: {
+    fontSize: 24,
+    color: '#000',
+  },
+  swiper: {
+    height: 400,
+  },
+  errorContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  errorText: {
+    fontSize: 16,
+    color: '#f00',
+  },
+});
 
 export default Properties;

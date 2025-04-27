@@ -1,18 +1,18 @@
-import React, { Suspense, useState } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import UserDetailContext from './context/UserDetailContext';
-import HomeScreen from './app/screens/HomeScreen';
-import ListingScreen from './app/screens/ListingScreen';
-import AddPropertyScreen from './app/screens/AddPropertyScreen';
-import BookingsScreen from './app/screens/BookingsScreen';
-import FavouritesScreen from './app/screens/FavouritesScreen';
-import BlogScreen from './components/Blogs';
-import BlogDetailsScreen from './components/BlogDetails';
-import { DevToolsBubble } from 'react-native-react-query-devtools';
-import Loading from './Loading';
-import { UserDetails } from './context/UserDetailContext'; // Corrected import path
+import React, { Suspense, useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import UserDetailContext from "./context/UserDetailContext";
+import HomeScreen from "./app/screens/HomeScreen";
+import ListingScreen from "./app/screens/ListingScreen";
+import AddPropertyScreen from "./app/screens/AddPropertyScreen";
+import BookingsScreen from "./app/screens/BookingsScreen";
+import FavouritesScreen from "./app/screens/FavouritesScreen";
+import BlogScreen from "./components/Blogs";
+import BlogDetailsScreen from "./components/BlogDetails";
+import { DevToolsBubble } from "react-native-react-query-devtools";
+import Loading from "./Loading"; // Corrected import path
+import { UserDetails } from "./context/UserDetailContext"; // Corrected import path
 
 const Tab = createBottomTabNavigator();
 
