@@ -13,6 +13,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "Loading.tsx" // Ensure this file is included
+    "Loading.tsx",
+    "src/components/**/*.tsx" // Include components folder
   ]
 }

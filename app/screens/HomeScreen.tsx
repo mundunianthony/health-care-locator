@@ -1,21 +1,20 @@
 import React from 'react';
-import { ScrollView, Image, View, StyleSheet } from 'react-native';
-import Hero from '../components/Hero'; // Must be converted
-import About from '../components/About'; // Must be converted
-import Properties from '../components/Properties'; // Must be converted
-import Blogs from '../components/Blogs'; // Must be converted
-
-const bannerImg = require('../assets/banner.png'); // Use require for local images
+import { View, Image, StyleSheet, ScrollView } from 'react-native';
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Properties from '../components/Properties';
+import Blogs from '../components/Blogs';
+import bannerImg from '../assets/banner.png';
 
 const Home: React.FC = () => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Hero />
       <About />
       <Properties />
       <Blogs />
       <View style={styles.bannerContainer}>
-        <Image source={bannerImg} style={styles.banner} />
+        <Image source={bannerImg} style={styles.bannerImage} resizeMode="cover" />
       </View>
     </ScrollView>
   );
@@ -23,15 +22,16 @@ const Home: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    paddingBottom: 16,
   },
   bannerContainer: {
-    padding: 16,
+    paddingVertical: 16,
+    overflow: 'hidden',
+    alignItems: 'center',
   },
-  banner: {
+  bannerImage: {
     width: '100%',
-    height: 200,
-    resizeMode: 'cover',
+    height: 200, // You can adjust the height to your needs
   },
 });
 
